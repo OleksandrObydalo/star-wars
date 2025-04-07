@@ -3,6 +3,13 @@ const playerY = window.innerHeight - 100;
 const playerSpeed = 10;
 let score = 0;
 
+document.documentElement.style.setProperty('--star-x', Math.random() * 100 + '%');
+document.documentElement.style.setProperty('--star-y', Math.random() * 100 + '%');
+document.documentElement.style.setProperty('--star2-x', Math.random() * 100 + '%');
+document.documentElement.style.setProperty('--star2-y', Math.random() * 100 + '%');
+document.documentElement.style.setProperty('--star3-x', Math.random() * 100 + '%');
+document.documentElement.style.setProperty('--star3-y', Math.random() * 100 + '%');
+
 const player = document.querySelector('.player-ship');
 const gameContainer = document.querySelector('.game-container');
 const scoreElement = document.getElementById('score');
@@ -120,4 +127,3 @@ function startGame() {
 }
 
 startGame();
-
