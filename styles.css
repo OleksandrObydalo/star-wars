@@ -30,13 +30,36 @@ body::before {
 }
 
 .player-ship {
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 80px;
   position: absolute;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5L35 85L50 75L65 85L50 5Z' fill='%23999'/%3E%3Cpath d='M35 85L25 95L50 75L75 95L65 85L50 75Z' fill='%23666'/%3E%3Cpath d='M45 40L40 70L50 65L60 70L55 40L50 35Z' fill='%23444'/%3E%3Ccircle cx='50' cy='30' r='5' fill='%23555'/%3E%3C/svg%3E") no-repeat center/contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3C!-- Millennium Falcon Body --%3E%3Cpath d='M50 60 L150 60 L180 40 Q190 30, 180 20 L150 10 Q140 5, 130 10 L70 10 Q60 5, 50 10 L20 20 Q10 30, 20 40 Z' fill='%23aaa' stroke='%23333' stroke-width='3'/%3E%3C!-- Engine Details --%3E%3Crect x='20' y='65' width='30' height='10' fill='%23555'/%3E%3Crect x='150' y='65' width='30' height='10' fill='%23555'/%3E%3C!-- Cockpit --%3E%3Cpath d='M90 30 L110 30 L120 40 L80 40 Z' fill='%23222' stroke='%23444' stroke-width='2'/%3E%3C!-- Side Detailing --%3E%3Cpath d='M60 40 L70 50 L80 40' fill='none' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M140 40 L130 50 L120 40' fill='none' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+
+.rocket-fire {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,100,0,0.7), rgba(255,200,0,0.3));
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  animation: flame 0.1s infinite alternate;
+}
+
+@keyframes flame {
+  0% {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-50%) scaleY(1.2);
+    opacity: 0.6;
+  }
 }
 
 .enemy-ship {

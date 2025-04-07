@@ -118,6 +118,12 @@ function updateGame() {
 
 function startGame() {
   document.addEventListener('keydown', movePlayer);
+  
+  // Create rocket fire element
+  const rocketFire = document.createElement('div');
+  rocketFire.className = 'rocket-fire';
+  player.appendChild(rocketFire);
+
   gameLoop = setInterval(() => {
     updateGame();
     if (Math.random() < 0.02) {
