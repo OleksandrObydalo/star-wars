@@ -47,10 +47,16 @@ function shoot() {
 function spawnEnemy() {
   const enemy = document.createElement('div');
   enemy.className = 'enemy-ship';
-  const x = Math.random() * (window.innerWidth - 40);
+  const x = Math.random() * (window.innerWidth - 80);
   enemy.style.left = x + 'px';
   enemy.style.top = '0px';
   gameContainer.appendChild(enemy);
+  
+  // Add rocket fire to enemy
+  const enemyRocketFire = document.createElement('div');
+  enemyRocketFire.className = 'enemy-rocket-fire';
+  enemy.appendChild(enemyRocketFire);
+  
   enemies.push({
     element: enemy,
     x: x,
@@ -93,6 +99,10 @@ function updateGame() {
   enemies.forEach((enemy, enemyIndex) => {
     enemy.y += 2;
     enemy.element.style.top = enemy.y + 'px';
+    
+    // Rotate enemy towards player
+    const angle = Math.atan2(playerY - enemy.y, playerX - enemy.x) * 180 / Math.PI;
+    enemy.element.style.transform = `rotate(${angle + 90}deg)`;
     
     if (enemy.y > window.innerHeight) {
       enemy.element.remove();
