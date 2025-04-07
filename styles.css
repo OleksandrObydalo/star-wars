@@ -36,6 +36,7 @@ body::before {
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
+  transition: transform 0.1s ease;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3C!-- Millennium Falcon Body --%3E%3Cpath d='M50 60 L150 60 L180 40 Q190 30, 180 20 L150 10 Q140 5, 130 10 L70 10 Q60 5, 50 10 L20 20 Q10 30, 20 40 Z' fill='%23aaa' stroke='%23333' stroke-width='3'/%3E%3C!-- Engine Details --%3E%3Crect x='20' y='65' width='30' height='10' fill='%23555'/%3E%3Crect x='150' y='65' width='30' height='10' fill='%23555'/%3E%3C!-- Cockpit --%3E%3Cpath d='M90 30 L110 30 L120 40 L80 40 Z' fill='%23222' stroke='%23444' stroke-width='2'/%3E%3C!-- Side Detailing --%3E%3Cpath d='M60 40 L70 50 L80 40' fill='none' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M140 40 L130 50 L120 40' fill='none' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E") no-repeat center/contain;
 }
 

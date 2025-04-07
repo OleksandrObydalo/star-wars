@@ -2,6 +2,14 @@ let playerX = window.innerWidth / 2;
 const playerY = window.innerHeight - 100;
 const playerSpeed = 10;
 let score = 0;
+let playerRotation = 0;
+
+// Track which keys are currently pressed
+const keysPressed = {
+  ArrowLeft: false,
+  ArrowRight: false,
+  ' ': false
+};
 
 document.documentElement.style.setProperty('--star-x', Math.random() * 100 + '%');
 document.documentElement.style.setProperty('--star-y', Math.random() * 100 + '%');
@@ -18,17 +26,39 @@ let lasers = [];
 let enemies = [];
 let gameLoop;
 
-function movePlayer(e) {
-  if (e.key === 'ArrowLeft' && playerX > 30) {
+function handleKeyDown(e) {
+  keysPressed[e.key] = true;
+}
+
+function handleKeyUp(e) {
+  keysPressed[e.key] = false;
+  // Reset rotation when no key is pressed
+  if (!keysPressed.ArrowLeft && !keysPressed.ArrowRight) {
+    playerRotation = 0;
+    player.style.transform = `translateX(-50%) rotate(${playerRotation}deg)`;
+  }
+}
+
+function processPlayerMovement() {
+  if (keysPressed.ArrowLeft && playerX > 30) {
     playerX -= playerSpeed;
+    playerRotation = -15; // Rotate left
   }
-  if (e.key === 'ArrowRight' && playerX < window.innerWidth - 30) {
+  if (keysPressed.ArrowRight && playerX < window.innerWidth - 30) {
     playerX += playerSpeed;
+    playerRotation = 15; // Rotate right
   }
-  if (e.key === ' ') {
-    shoot();
-  }
+  
   player.style.left = playerX + 'px';
+  player.style.transform = `translateX(-50%) rotate(${playerRotation}deg)`;
+}
+
+function processPlayerShooting() {
+  if (keysPressed[' ']) {
+    shoot();
+    // Prevent continuous shooting by briefly disabling the spacebar
+    keysPressed[' '] = false;
+  }
 }
 
 function shoot() {
@@ -127,7 +157,8 @@ function updateGame() {
 }
 
 function startGame() {
-  document.addEventListener('keydown', movePlayer);
+  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keyup', handleKeyUp);
   
   // Create rocket fire element
   const rocketFire = document.createElement('div');
@@ -135,6 +166,8 @@ function startGame() {
   player.appendChild(rocketFire);
 
   gameLoop = setInterval(() => {
+    processPlayerMovement();
+    processPlayerShooting();
     updateGame();
     if (Math.random() < 0.02) {
       spawnEnemy();
